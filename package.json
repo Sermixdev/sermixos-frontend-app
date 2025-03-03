@@ -9,7 +9,7 @@
         "lint": "eslint .",
         "preview": "vite preview",
         "test": "vitest",
-        "start": "vite preview --port $PORT --host 0.0.0.0"
+        "start": "vite preview --port ${PORT} --host 0.0.0.0"
     },
     "dependencies": {
         "lucide-react": "^0.344.0",
