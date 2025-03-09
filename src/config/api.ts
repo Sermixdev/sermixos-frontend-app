@@ -1,7 +1,7 @@
 export const API_CONFIG = {
   baseUrl: import.meta.env.MODE === 'development' 
-    ? 'https://postgres-develop-e5d1.up.railway.app:5432'
-    : 'PRODUCTION_URL', // TODO: Replace with production URL
+    ? 'https://www-dev.sermix.dev'
+    : 'https://sermix.dev', 
   headers: {
     'Content-Type': 'application/json',
   },
