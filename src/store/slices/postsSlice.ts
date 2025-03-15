@@ -1,40 +1,41 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { Post, PaginatedResponse } from '../../types/api';
-import { getPosts } from '../../services/api';
+import { Post } from '../../types/api';
+import { API_CONFIG } from '../../config/api';
 
 interface PostsState {
   posts: Post[];
   currentPost: Post | null;
   loading: boolean;
   error: string | null;
-  pagination: {
-    currentPage: number;
-    totalPages: number;
-    totalItems: number;
-    itemsPerPage: number;
-  };
 }
 
 const initialState: PostsState = {
   posts: [],
   currentPost: null,
   loading: false,
-  error: null,
-  pagination: {
-    currentPage: 1,
-    totalPages: 1,
-    totalItems: 0,
-    itemsPerPage: 10,
-  },
+  error: null
 };
 
 
 export const fetchPosts = createAsyncThunk(
   'posts/fetchPosts',
-  async ({ page = 1, limit = 5 }: { page?: number; limit?: number } = {}, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const response = await getPosts(page, limit);
-      return response;
+      const response = await fetch(`${API_CONFIG.baseUrl}/posts`, {
+        method: 'GET',
+        headers: {
+          ...API_CONFIG.headers,
+          'Access-Control-Allow-Origin': '*'
+        },
+        mode: 'cors',
+        credentials: 'omit'
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error ${response.status}: ${response.statusText}`);
+      }
+
+      return await response.json();
     } catch (error) {
       if (error instanceof Error) {
         return rejectWithValue(error.message);
@@ -86,8 +87,7 @@ const postsSlice = createSlice({
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.loading = false;
-        state.posts = action.payload.data;
-        state.pagination = action.payload.meta;
+        state.posts = action.payload;
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.loading = false;

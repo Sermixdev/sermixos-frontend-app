@@ -33,31 +33,7 @@ const PostDate = styled.div`
 const PostContent = styled.div`
   color: #333;
   line-height: 1.5;
-`;
-
-const Pagination = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
-`;
-
-const PaginationButton = styled.button<{ $isActive?: boolean }>`
-  padding: 0.5rem 1rem;
-  background: ${props => props.$isActive ? '#000080' : '#c0c0c0'};
-  color: ${props => props.$isActive ? 'white' : 'black'};
-  border: none;
-  cursor: pointer;
-  box-shadow: inset -1px -1px 0 #000000, inset 1px 1px 0 #ffffff;
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  &:active {
-    box-shadow: inset 1px 1px 0 #000000, inset -1px -1px 0 #ffffff;
-  }
+  white-space: pre-wrap;
 `;
 
 const LoadingContainer = styled.div`
@@ -78,11 +54,11 @@ const ErrorMessage = styled.div`
 
 const PostList: React.FC = () => {
   const dispatch = useDispatch();
-  const { posts, loading, error, pagination } = useSelector((state: RootState) => state.posts);
+  const { posts, loading, error } = useSelector((state: RootState) => state.posts);
   const [showTimeout, setShowTimeout] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchPosts({ page: 1, limit: 10 }));
+    dispatch(fetchPosts());
     return () => {
       dispatch(clearError());
     };
@@ -106,10 +82,6 @@ const PostList: React.FC = () => {
     };
   }, [loading, posts.length]);
 
-  const handlePageChange = (page: number) => {
-    dispatch(fetchPosts({ page, limit: pagination.itemsPerPage }));
-  };
-
   if (loading && posts.length === 0) {
     return (
       <LoadingContainer>
@@ -132,41 +104,26 @@ const PostList: React.FC = () => {
   if (!posts || posts.length === 0) {
     return <ErrorMessage>No hay posts disponibles</ErrorMessage>;
   }
+
   return (
     <PostListContainer>
-      {posts.map(post => (
+      {[...posts].sort((a, b) => 
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      ).slice(0, 5).map(post => (
         <PostCard key={post.id}>
           <PostTitle>{post.title}</PostTitle>
-          <PostDate>{new Date(post.created_at).toLocaleDateString()}</PostDate>
+          <PostDate>
+            {new Date(post.created_at).toLocaleDateString('es-ES', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit'
+            })}
+          </PostDate>
           <PostContent>{post.content}</PostContent>
         </PostCard>
       ))}
-
-      <Pagination>
-        <PaginationButton
-          disabled={pagination.currentPage === 1}
-          onClick={() => handlePageChange(pagination.currentPage - 1)}
-        >
-          Anterior
-        </PaginationButton>
-        
-        {Array.from({ length: pagination.totalPages }, (_, i) => i + 1).map(page => (
-          <PaginationButton
-            key={page}
-            $isActive={page === pagination.currentPage}
-            onClick={() => handlePageChange(page)}
-          >
-            {page}
-          </PaginationButton>
-        ))}
-
-        <PaginationButton
-          disabled={pagination.currentPage === pagination.totalPages}
-          onClick={() => handlePageChange(pagination.currentPage + 1)}
-        >
-          Siguiente
-        </PaginationButton>
-      </Pagination>
     </PostListContainer>
   );
 };
