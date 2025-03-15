@@ -67,8 +67,8 @@ const TitleBarIcon = styled.div`
 `;
 
 const TitleBarText = styled.div`
-  font-weight: bold;
-  font-size: 12px;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

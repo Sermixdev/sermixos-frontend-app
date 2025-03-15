@@ -35,7 +35,8 @@ const StartMenuHeader = styled.div`
   padding: 10px;
   background: linear-gradient(to right, #000080, #1084d0);
   color: white;
-  font-weight: bold;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-base);
 `;
 
 const StartMenuItems = styled.div`
@@ -46,6 +47,7 @@ const StartMenuItem = styled.div`
   display: flex;
   align-items: center;
   padding: 8px 15px;
+  font-size: var(--font-size-base);
   cursor: pointer;
 
   &:hover {

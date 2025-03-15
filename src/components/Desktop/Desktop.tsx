@@ -17,8 +17,6 @@ const DesktopContainer = styled.div`
   background-size: cover;
   background-position: center;
   overflow: hidden;
-  position: relative;
-  font-family: 'MS Sans Serif', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 `;
 
 const IconsContainer = styled.div`
