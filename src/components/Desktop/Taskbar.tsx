@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { toggleStartMenu, closeStartMenu } from '../../store/slices/desktopSlice';
 import { restoreWindow, focusWindow } from '../../store/slices/windowsSlice';
-import { useSound } from '../../hooks/useSound';
 import StartMenu from './StartMenu';
 import * as LucideIcons from 'lucide-react';
 
@@ -106,7 +105,6 @@ const Taskbar: React.FC = () => {
   const dispatch = useDispatch();
   const { startMenuOpen } = useSelector((state: RootState) => state.desktop);
   const { windows, activeWindowId } = useSelector((state: RootState) => state.windows);
-  const { playSound } = useSound();
   const [time, setTime] = React.useState(new Date());
 
   React.useEffect(() => {
@@ -118,7 +116,6 @@ const Taskbar: React.FC = () => {
 
   const handleStartClick = () => {
     dispatch(toggleStartMenu());
-    playSound('CLICK');
   };
 
   const handleTaskbarItemClick = (id: string) => {
@@ -132,7 +129,6 @@ const Taskbar: React.FC = () => {
         dispatch(restoreWindow(id));
       }
     }
-    playSound('CLICK');
   };
 
   const handleClickOutside = (e: React.MouseEvent) => {

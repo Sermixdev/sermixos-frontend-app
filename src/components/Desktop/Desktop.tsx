@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { RootState } from '../../store';
 import { selectIcon, closeStartMenu } from '../../store/slices/desktopSlice';
 import { openWindow } from '../../store/slices/windowsSlice';
-import { useSound } from '../../hooks/useSound';
 import DesktopIcon from './DesktopIcon';
 import Taskbar from './Taskbar';
 import WindowManager from '../Windows/WindowManager';
@@ -35,16 +34,9 @@ const IconsContainer = styled.div`
 const Desktop: React.FC = () => {
   const dispatch = useDispatch();
   const { icons, selectedIconId } = useSelector((state: RootState) => state.desktop);
-  const { playSound } = useSound();
-
-  useEffect(() => {
-    // Play startup sound when component mounts
-    playSound('STARTUP');
-  }, [playSound]);
 
   const handleIconClick = (id: string) => {
     dispatch(selectIcon(id === selectedIconId ? null : id));
-    playSound('CLICK');
   };
 
   const handleIconDoubleClick = (id: string) => {
@@ -57,7 +49,6 @@ const Desktop: React.FC = () => {
         position: { x: 100, y: 100, width: 600, height: 400 },
         component: icon.component,
       }));
-      playSound('WINDOW_OPEN');
     }
   };
 

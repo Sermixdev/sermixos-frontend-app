@@ -23,12 +23,8 @@ export const fetchPosts = createAsyncThunk(
     try {
       const response = await fetch(`${API_CONFIG.baseUrl}/posts`, {
         method: 'GET',
-        headers: {
-          ...API_CONFIG.headers,
-          'Access-Control-Allow-Origin': '*'
-        },
-        mode: 'cors',
-        credentials: 'omit'
+        headers: API_CONFIG.headers,
+        mode: 'cors'
       });
 
       if (!response.ok) {

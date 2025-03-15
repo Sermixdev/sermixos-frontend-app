@@ -3,7 +3,6 @@ import windowsReducer from './slices/windowsSlice';
 import desktopReducer from './slices/desktopSlice';
 import postsReducer from './slices/postsSlice';
 import projectsReducer from './slices/projectsSlice';
-import soundReducer from './slices/soundSlice';
 import recycleBinReducer from './slices/recycleBinSlice';
 
 export const store = configureStore({
@@ -12,7 +11,6 @@ export const store = configureStore({
     desktop: desktopReducer,
     posts: postsReducer,
     projects: projectsReducer,
-    sound: soundReducer,
     recycleBin: recycleBinReducer,
   },
 });

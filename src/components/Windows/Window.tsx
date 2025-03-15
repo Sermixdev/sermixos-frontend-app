@@ -10,7 +10,6 @@ import {
   focusWindow,
   updateWindowPosition,
 } from '../../store/slices/windowsSlice';
-import { useSound } from '../../hooks/useSound';
 import * as LucideIcons from 'lucide-react';
 import { WindowPosition } from '../../types';
 
@@ -122,7 +121,6 @@ const Window: React.FC<WindowProps> = ({
 }) => {
   const dispatch = useDispatch();
   const { activeWindowId } = useSelector((state: RootState) => state.windows);
-  const { playSound } = useSound();
   const [position, setPosition] = useState(initialPosition);
   const isActive = activeWindowId === id;
 
@@ -137,19 +135,16 @@ const Window: React.FC<WindowProps> = ({
   const handleClose = (e: React.MouseEvent) => {
     e.stopPropagation();
     dispatch(closeWindow(id));
-    playSound('WINDOW_CLOSE');
   };
 
   const handleMinimize = (e: React.MouseEvent) => {
     e.stopPropagation();
     dispatch(minimizeWindow(id));
-    playSound('CLICK');
   };
 
   const handleMaximize = (e: React.MouseEvent) => {
     e.stopPropagation();
     dispatch(maximizeWindow(id));
-    playSound('CLICK');
   };
 
   const handleFocus = () => {

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { closeStartMenu } from '../../store/slices/desktopSlice';
 import { openWindow } from '../../store/slices/windowsSlice';
-import { useSound } from '../../hooks/useSound';
 import * as LucideIcons from 'lucide-react';
 
 const StartMenuContainer = styled.div`
@@ -70,7 +69,6 @@ const Divider = styled.div`
 
 const StartMenu: React.FC = () => {
   const dispatch = useDispatch();
-  const { playSound } = useSound();
 
   const handleMenuItemClick = (component: string, title: string, icon: string) => {
     dispatch(closeStartMenu());
@@ -88,7 +86,6 @@ const StartMenu: React.FC = () => {
         component,
       })
     );
-    playSound('WINDOW_OPEN');
   };
 
   return (
