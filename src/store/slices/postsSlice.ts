@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { Post, PaginatedResponse } from '../../types/api';
-import { BlogApi } from '../../services/api';
+import { getPosts } from '../../services/api';
+
 interface PostsState {
   posts: Post[];
   currentPost: Post | null;
@@ -30,9 +31,9 @@ const initialState: PostsState = {
 
 export const fetchPosts = createAsyncThunk(
   'posts/fetchPosts',
-  async ({ page = 1, limit = 10 }: { page?: number; limit?: number } = {}, { rejectWithValue }) => {
+  async ({ page = 1, limit = 5 }: { page?: number; limit?: number } = {}, { rejectWithValue }) => {
     try {
-      const response = await BlogApi.getPosts(page, limit);
+      const response = await getPosts(page, limit);
       return response;
     } catch (error) {
       if (error instanceof Error) {
@@ -47,28 +48,21 @@ export const fetchPostById = createAsyncThunk(
   'posts/fetchPostById',
   async (id: string, { rejectWithValue }) => {
     try {
-      const response = await BlogApi.getPostById(id);
-      return response;
-    } catch (error) {
-      if (error instanceof Error) {
-        return rejectWithValue(error.message);
-      }
-      return rejectWithValue('Error al obtener los posts');
-    }
-  }
-);
+      const response = await fetch(`${API_CONFIG.baseUrl}/posts/${id}`, {
+        method: 'GET',
+        headers: API_CONFIG.headers,
+      });
 
-export const createPost = createAsyncThunk(
-  'posts/createPost',
-  async (postData: { title: string; content: string }, { rejectWithValue, getState }) => {
-    try {
-      const newPost = await BlogApi.createPost(postData);
-      return newPost;
+      if (!response.ok) {
+        throw new Error(`Error ${response.status}: ${response.statusText}`);
+      }
+
+      return await response.json();
     } catch (error) {
       if (error instanceof Error) {
         return rejectWithValue(error.message);
       }
-      return rejectWithValue('Error al crear el post');
+      return rejectWithValue('Error al obtener los detalles del post');
     }
   }
 );
@@ -108,19 +102,6 @@ const postsSlice = createSlice({
         state.currentPost = action.payload.data[0];
       })
       .addCase(fetchPostById.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload as string;
-      })
-      .addCase(createPost.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(createPost.fulfilled, (state, action) => {
-        state.loading = false;
-        state.posts.unshift(action.payload);
-        state.pagination.totalItems += 1;
-      })
-      .addCase(createPost.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });

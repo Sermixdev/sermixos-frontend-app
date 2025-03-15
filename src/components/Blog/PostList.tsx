@@ -114,7 +114,7 @@ const PostList: React.FC = () => {
     return (
       <LoadingContainer>
         {showTimeout ? (
-          <ErrorMessage>No se ha obtenido ninguna entrada de blog</ErrorMessage>
+          <ErrorMessage>Error al cargar los posts. Por favor, intenta de nuevo más tarde.</ErrorMessage>
         ) : (
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <Loader className="animate-spin" size={24} />
@@ -129,6 +129,9 @@ const PostList: React.FC = () => {
     return <ErrorMessage>{error}</ErrorMessage>;
   }
 
+  if (!posts || posts.length === 0) {
+    return <ErrorMessage>No hay posts disponibles</ErrorMessage>;
+  }
   return (
     <PostListContainer>
       {posts.map(post => (
