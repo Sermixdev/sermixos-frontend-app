@@ -94,7 +94,7 @@ const StartMenu: React.FC = () => {
     <StartMenuContainer id="start-menu">
       <StartMenuHeader>
         <LucideIcons.User size={24} style={{ marginRight: '10px' }} />
-        RetroOS v1.0
+        SermixOS v1.2
       </StartMenuHeader>
       <StartMenuItems>
         <StartMenuItem onClick={() => handleMenuItemClick('Blog', 'Blog', 'FileText')}>
