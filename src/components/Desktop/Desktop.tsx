@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { RootState } from '../../store';
@@ -15,6 +15,7 @@ const DesktopContainer = styled.div`
   width: 100vw;
   background-image: url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=2070&auto=format&fit=crop');
   background-size: cover;
+  background-repeat: no-repeat;
   background-position: center;
   overflow: hidden;
 `;
