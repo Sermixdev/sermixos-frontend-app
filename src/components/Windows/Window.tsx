@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Rnd } from 'react-rnd';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
@@ -188,11 +188,11 @@ const Window: React.FC<WindowProps> = ({
       dragHandleClassName="title-bar"
       maxWidth={window.innerWidth}
       maxHeight={window.innerHeight - 40}
-      minWidth={400}
-      minHeight={300}
+      minWidth={600}
+      minHeight={450}
       bounds="parent"
       onClick={handleFocus}
-      onResize={(e, direction, ref) => {
+      onResize={(_e, _direction, ref) => {
         ref.style.height = `${parseInt(ref.style.height)}px`;
         ref.style.width = `${parseInt(ref.style.width)}px`;
       }}
