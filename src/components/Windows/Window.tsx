@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Rnd } from 'react-rnd';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,7 +10,6 @@ import {
   focusWindow,
   updateWindowPosition,
 } from '../../store/slices/windowsSlice';
-import { useSound } from '../../hooks/useSound';
 import * as LucideIcons from 'lucide-react';
 import { WindowPosition } from '../../types';
 
@@ -68,8 +67,8 @@ const TitleBarIcon = styled.div`
 `;
 
 const TitleBarText = styled.div`
-  font-weight: bold;
-  font-size: 12px;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -122,7 +121,6 @@ const Window: React.FC<WindowProps> = ({
 }) => {
   const dispatch = useDispatch();
   const { activeWindowId } = useSelector((state: RootState) => state.windows);
-  const { playSound } = useSound();
   const [position, setPosition] = useState(initialPosition);
   const isActive = activeWindowId === id;
 
@@ -132,24 +130,25 @@ const Window: React.FC<WindowProps> = ({
   }
 
   // Get the icon component from lucide-react
-  const IconComponent = LucideIcons[icon as keyof typeof LucideIcons] || LucideIcons.File;
+  const IconComponent: React.FC<{ size: number }> = ({ size }) => {
+    const Icon = LucideIcons[icon as keyof typeof LucideIcons] as React.FC<{ size: number }> || LucideIcons.File;
+    return <Icon size={size} />;
+  };
 
   const handleClose = (e: React.MouseEvent) => {
+    console.log('Window closed');
     e.stopPropagation();
     dispatch(closeWindow(id));
-    playSound('WINDOW_CLOSE');
   };
 
   const handleMinimize = (e: React.MouseEvent) => {
     e.stopPropagation();
     dispatch(minimizeWindow(id));
-    playSound('CLICK');
   };
 
   const handleMaximize = (e: React.MouseEvent) => {
     e.stopPropagation();
     dispatch(maximizeWindow(id));
-    playSound('CLICK');
   };
 
   const handleFocus = () => {
@@ -170,8 +169,10 @@ const Window: React.FC<WindowProps> = ({
       width: parseInt(ref.style.width),
       height: parseInt(ref.style.height),
     };
-    setPosition(newPosition);
-    dispatch(updateWindowPosition({ id, position: newPosition }));
+    if (newPosition.width >= 600 && newPosition.height >= 450) {
+      setPosition(newPosition);
+      dispatch(updateWindowPosition({ id, position: newPosition }));
+    }
   };
 
   return (
@@ -193,11 +194,11 @@ const Window: React.FC<WindowProps> = ({
       dragHandleClassName="title-bar"
       maxWidth={window.innerWidth}
       maxHeight={window.innerHeight - 40}
-      minWidth={400}
-      minHeight={300}
+      minWidth={600}
+      minHeight={450}
       bounds="parent"
       onClick={handleFocus}
-      onResize={(e, direction, ref) => {
+      onResize={(_e, _direction, ref) => {
         ref.style.height = `${parseInt(ref.style.height)}px`;
         ref.style.width = `${parseInt(ref.style.width)}px`;
       }}

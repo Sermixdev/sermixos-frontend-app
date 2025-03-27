@@ -156,23 +156,23 @@ const AboutMe: React.FC = () => {
   return (
     <AboutContainer>
       <Helmet>
-        <title>Sobre Mí - RetroOS</title>
-        <meta name="description" content="Perfil profesional e información de antecedentes" />
+        <title>Sobre Mí - SermixOS</title>
+        <meta name="description" content="Perfil profesional y experiencia" />
       </Helmet>
       
       <AboutHeader>
         <AboutTitle>Sobre Mí</AboutTitle>
-        <AboutDescription>Perfil profesional y antecedentes</AboutDescription>
+        <AboutDescription>Perfil profesional y experiencia</AboutDescription>
       </AboutHeader>
 
       <ProfileSection>
-        <ProfileImage src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop" alt="Profile" />
+        <ProfileImage src="/images/about-me-profile-photo.jpeg" alt="Profile" />
         <ProfileInfo>
-          <ProfileName>Juan Desarrollador</ProfileName>
-          <ProfileTitle>Desarrollador Full-Stack Senior & Especialista en IA</ProfileTitle>
+          <ProfileName>Sergio Ferrer Bueno</ProfileName>
+          <ProfileTitle>Desarrollador Web & Especialista en automatizaciones con IA</ProfileTitle>
           <ProfileBio>
             Apasionado por crear soluciones innovadoras en la intersección del desarrollo web y la inteligencia artificial. 
-            Con más de 8 años de experiencia construyendo aplicaciones escalables, me especializo en frameworks modernos de JavaScript, 
+            Me especializo en frameworks modernos de JavaScript, 
             visualización de datos e integración de capacidades de IA en aplicaciones web.
           </ProfileBio>
         </ProfileInfo>
@@ -203,7 +203,7 @@ const AboutMe: React.FC = () => {
             <SkillIcon>
               <LucideIcons.Database size={16} />
             </SkillIcon>
-            MongoDB
+            PostgreSQL
           </SkillItem>
           <SkillItem>
             <SkillIcon>
@@ -221,13 +221,25 @@ const AboutMe: React.FC = () => {
             <SkillIcon>
               <LucideIcons.Cloud size={16} />
             </SkillIcon>
-            AWS
+            Cloud
           </SkillItem>
           <SkillItem>
             <SkillIcon>
               <LucideIcons.GitBranch size={16} />
             </SkillIcon>
             Git & CI/CD
+          </SkillItem>
+          <SkillItem>
+            <SkillIcon>
+              <LucideIcons.Atom size={16} />
+            </SkillIcon>
+            AI Automation
+          </SkillItem>
+          <SkillItem>
+            <SkillIcon>
+              <LucideIcons.Text size={16} />
+            </SkillIcon>
+            Data collection
           </SkillItem>
         </SkillsGrid>
       </Section>
@@ -236,35 +248,11 @@ const AboutMe: React.FC = () => {
         <SectionTitle>Experiencia</SectionTitle>
         
         <ExperienceItem>
-          <ExperienceTitle>Desarrollador Full-Stack Senior</ExperienceTitle>
-          <ExperienceCompany>TechInnovate Solutions</ExperienceCompany>
-          <ExperiencePeriod>Enero 2022 - Presente</ExperiencePeriod>
-          <ExperienceDescription>
-            Desarrollador líder de aplicaciones web empresariales con enfoque en integración de IA.
-            Arquitecto e implementé soluciones escalables usando React, Node.js y MongoDB.
-            Mentoría a desarrolladores junior y establecí mejores prácticas para el equipo de desarrollo.
-          </ExperienceDescription>
-        </ExperienceItem>
-        
-        <ExperienceItem>
           <ExperienceTitle>Desarrollador Full-Stack</ExperienceTitle>
-          <ExperienceCompany>DataViz Corp</ExperienceCompany>
-          <ExperiencePeriod>Marzo 2019 - Diciembre 2021</ExperiencePeriod>
+          <ExperienceCompany>WIP</ExperienceCompany>
+          <ExperiencePeriod>WIP </ExperiencePeriod>
           <ExperienceDescription>
-            Desarrollé paneles de visualización de datos interactivos usando D3.js y React.
-            Implementé APIs RESTful y procesamiento de datos en tiempo real con Node.js y WebSockets.
-            Optimicé consultas de base de datos e implementé estrategias de caché para mejorar el rendimiento.
-          </ExperienceDescription>
-        </ExperienceItem>
-        
-        <ExperienceItem>
-          <ExperienceTitle>Desarrollador Front-End</ExperienceTitle>
-          <ExperienceCompany>WebCraft Studios</ExperienceCompany>
-          <ExperiencePeriod>Junio 2017 - Febrero 2019</ExperiencePeriod>
-          <ExperienceDescription>
-            Construí aplicaciones web responsivas usando frameworks modernos de JavaScript.
-            Colaboré con diseñadores para implementar componentes UI pixel-perfect.
-            Mejoré el rendimiento del sitio a través de optimización de código y herramientas de construcción modernas.
+            WIP
           </ExperienceDescription>
         </ExperienceItem>
       </Section>
@@ -273,15 +261,15 @@ const AboutMe: React.FC = () => {
         <SectionTitle>Educación</SectionTitle>
         
         <EducationItem>
-          <EducationDegree>Maestría en Ciencias de la Computación</EducationDegree>
-          <EducationInstitution>Universidad Tecnológica</EducationInstitution>
-          <EducationPeriod>2015 - 2017</EducationPeriod>
+          <EducationDegree>WIP</EducationDegree>
+          <EducationInstitution>WIP</EducationInstitution>
+          <EducationPeriod>WIP</EducationPeriod>
         </EducationItem>
         
         <EducationItem>
-          <EducationDegree>Ingeniería en Software</EducationDegree>
-          <EducationInstitution>Universidad Estatal</EducationInstitution>
-          <EducationPeriod>2011 - 2015</EducationPeriod>
+          <EducationDegree>WIP</EducationDegree>
+          <EducationInstitution>WIP</EducationInstitution>
+          <EducationPeriod>WIP</EducationPeriod>
         </EducationItem>
       </Section>
 
@@ -289,18 +277,18 @@ const AboutMe: React.FC = () => {
         <SectionTitle>Certificaciones</SectionTitle>
         
         <ExperienceItem>
-          <ExperienceTitle>Arquitecto de Soluciones Certificado AWS</ExperienceTitle>
-          <ExperiencePeriod>2023</ExperiencePeriod>
+          <ExperienceTitle>WIP</ExperienceTitle>
+          <ExperiencePeriod>WIP</ExperiencePeriod>
         </ExperienceItem>
         
         <ExperienceItem>
-          <ExperienceTitle>Certificado de Desarrollador TensorFlow</ExperienceTitle>
-          <ExperiencePeriod>2022</ExperiencePeriod>
+          <ExperienceTitle>WIP</ExperienceTitle>
+          <ExperiencePeriod>WIP</ExperiencePeriod>
         </ExperienceItem>
         
         <ExperienceItem>
-          <ExperienceTitle>Desarrollador Certificado MongoDB</ExperienceTitle>
-          <ExperiencePeriod>2020</ExperiencePeriod>
+          <ExperienceTitle>WIP</ExperienceTitle>
+          <ExperiencePeriod>WIP</ExperiencePeriod>
         </ExperienceItem>
       </Section>
     </AboutContainer>

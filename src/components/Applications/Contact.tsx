@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet-async';
 import * as LucideIcons from 'lucide-react';
-import { useSound } from '../../hooks/useSound';
 
 const ContactContainer = styled.div`
   display: flex;
@@ -200,7 +199,6 @@ const Contact: React.FC = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
-  const { playSound } = useSound();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -216,10 +214,8 @@ const Contact: React.FC = () => {
       if (Math.random() > 0.2) { // 80% success rate for demo
         setSubmitStatus('success');
         setFormData({ name: '', email: '', message: '' });
-        playSound('WINDOW_OPEN');
       } else {
         setSubmitStatus('error');
-        playSound('ERROR');
       }
       setIsSubmitting(false);
     }, 1500);

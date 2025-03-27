@@ -1,8 +1,7 @@
 export const API_CONFIG = {
-  baseUrl: import.meta.env.MODE === 'development' 
-    ? 'https://www-dev.sermix.dev'
-    : 'https://sermix.dev', 
+  baseUrl: 'https://api-dev.sermix.dev',
   headers: {
     'Content-Type': 'application/json',
+    'Origin': window.location.origin
   },
 };

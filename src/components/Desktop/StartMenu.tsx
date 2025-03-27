@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { closeStartMenu } from '../../store/slices/desktopSlice';
 import { openWindow } from '../../store/slices/windowsSlice';
-import { useSound } from '../../hooks/useSound';
 import * as LucideIcons from 'lucide-react';
 
 const StartMenuContainer = styled.div`
@@ -36,7 +35,8 @@ const StartMenuHeader = styled.div`
   padding: 10px;
   background: linear-gradient(to right, #000080, #1084d0);
   color: white;
-  font-weight: bold;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-base);
 `;
 
 const StartMenuItems = styled.div`
@@ -47,6 +47,7 @@ const StartMenuItem = styled.div`
   display: flex;
   align-items: center;
   padding: 8px 15px;
+  font-size: var(--font-size-base);
   cursor: pointer;
 
   &:hover {
@@ -70,7 +71,6 @@ const Divider = styled.div`
 
 const StartMenu: React.FC = () => {
   const dispatch = useDispatch();
-  const { playSound } = useSound();
 
   const handleMenuItemClick = (component: string, title: string, icon: string) => {
     dispatch(closeStartMenu());
@@ -88,14 +88,13 @@ const StartMenu: React.FC = () => {
         component,
       })
     );
-    playSound('WINDOW_OPEN');
   };
 
   return (
     <StartMenuContainer id="start-menu">
       <StartMenuHeader>
         <LucideIcons.User size={24} style={{ marginRight: '10px' }} />
-        RetroOS v1.0
+        SermixOS v1.2
       </StartMenuHeader>
       <StartMenuItems>
         <StartMenuItem onClick={() => handleMenuItemClick('Blog', 'Blog', 'FileText')}>

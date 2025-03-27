@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { toggleSound, setVolume } from '../../store/slices/soundSlice';
+import { useSelector } from 'react-redux';
 import * as LucideIcons from 'lucide-react';
 
 const SettingsContainer = styled.div`
@@ -154,20 +152,9 @@ const ThemeSelector = styled.select`
 `;
 
 const Settings: React.FC = () => {
-  const dispatch = useDispatch();
-  const { enabled: soundEnabled, volume } = useSelector((state: RootState) => state.sound);
   const [theme, setTheme] = React.useState('default');
   const [animations, setAnimations] = React.useState(true);
   const [highContrast, setHighContrast] = React.useState(false);
-
-  const handleSoundToggle = () => {
-    dispatch(toggleSound());
-  };
-
-  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseFloat(e.target.value);
-    dispatch(setVolume(value));
-  };
 
   const handleThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setTheme(e.target.value);
@@ -187,57 +174,6 @@ const Settings: React.FC = () => {
         <SettingsTitle>Settings</SettingsTitle>
         <SettingsDescription>Customize your RetroOS experience</SettingsDescription>
       </SettingsHeader>
-
-      <SettingsSection>
-        <SectionTitle>Sound</SectionTitle>
-        <SettingItem>
-          <SettingInfo>
-            <SettingIcon>
-              <LucideIcons.Volume2 size={24} />
-            </SettingIcon>
-            <SettingText>
-              <SettingName>System Sounds</SettingName>
-              <SettingDescription>Enable or disable system sound effects</SettingDescription>
-            </SettingText>
-          </SettingInfo>
-          <SettingControl>
-            <Switch>
-              <SwitchInput
-                type="checkbox"
-                checked={soundEnabled}
-                onChange={handleSoundToggle}
-              />
-              <SwitchSlider />
-            </Switch>
-          </SettingControl>
-        </SettingItem>
-        <SettingItem>
-          <SettingInfo>
-            <SettingIcon>
-              <LucideIcons.VolumeX size={24} />
-            </SettingIcon>
-            <SettingText>
-              <SettingName>Volume</SettingName>
-              <SettingDescription>Adjust system sound volume</SettingDescription>
-            </SettingText>
-          </SettingInfo>
-          <SettingControl>
-            <VolumeControl>
-              <LucideIcons.Volume1 size={16} />
-              <VolumeSlider
-                type="range"
-                min="0"
-                max="1"
-                step="0.1"
-                value={volume}
-                onChange={handleVolumeChange}
-                disabled={!soundEnabled}
-              />
-              <VolumeValue>{Math.round(volume * 100)}%</VolumeValue>
-            </VolumeControl>
-          </SettingControl>
-        </SettingItem>
-      </SettingsSection>
 
       <SettingsSection>
         <SectionTitle>Appearance</SectionTitle>

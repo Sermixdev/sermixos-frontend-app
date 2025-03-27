@@ -113,43 +113,9 @@ const TopicContent = styled.div`
   }
 `;
 
-const SearchBox = styled.div`
-  display: flex;
-  margin-bottom: 20px;
-`;
-
-const SearchInput = styled.input`
-  flex: 1;
-  padding: 8px 10px;
-  font-size: 14px;
-  border: 1px solid #c0c0c0;
-  border-right: none;
-  background-color: white;
-  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.1);
-
-  &:focus {
-    outline: none;
-  }
-`;
-
-const SearchButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 10px;
-  background-color: #c0c0c0;
-  border: 1px solid #c0c0c0;
-  box-shadow: inset -1px -1px 0 #000000, inset 1px 1px 0 #ffffff;
-  cursor: pointer;
-
-  &:active {
-    box-shadow: inset 1px 1px 0 #000000, inset -1px -1px 0 #ffffff;
-  }
-`;
 
 const Help: React.FC = () => {
   const [activeTopic, setActiveTopic] = React.useState('getting-started');
-  const [searchQuery, setSearchQuery] = React.useState('');
 
   const topics = [
     {
@@ -158,14 +124,14 @@ const Help: React.FC = () => {
       icon: 'Home',
       content: (
         <>
-          <h3>¡Bienvenido a RetroOS!</h3>
+          <h3>¡Bienvenido a SermixOS!</h3>
           <p>
-            RetroOS es una aplicación web moderna que simula la apariencia y el funcionamiento de los sistemas operativos clásicos de finales de los 90 y principios de los 2000. Esta guía te ayudará a navegar y usar las diferentes características de RetroOS.
+            SermixOS es una aplicación web moderna que simula la apariencia y el funcionamiento de los sistemas operativos clásicos de finales de los 90 y principios de los 2000. Esta guía te ayudará a navegar y usar las diferentes características de SermixOS.
           </p>
           
           <h3>Navegación Básica</h3>
           <p>
-            RetroOS cuenta con un entorno de escritorio con iconos, ventanas y una barra de tareas, similar a los sistemas Windows 98 o Linux 2000 clásicos.
+            SermixOS cuenta con un entorno de escritorio con iconos, ventanas y una barra de tareas, similar a los sistemas Windows 98 o Linux 2000 clásicos.
           </p>
           <ul>
             <li><strong>Iconos de Escritorio:</strong> Un clic para seleccionar, doble clic para abrir.</li>
@@ -184,7 +150,7 @@ const Help: React.FC = () => {
         <>
           <h3>Controles de Ventana</h3>
           <p>
-            Cada ventana en RetroOS tiene controles estándar en la esquina superior derecha:
+            Cada ventana en SermixOS tiene controles estándar en la esquina superior derecha:
           </p>
           <ul>
             <li><strong>Minimizar (-):</strong> Oculta la ventana pero la mantiene ejecutándose en la barra de tareas.</li>
@@ -212,7 +178,7 @@ const Help: React.FC = () => {
         <>
           <h3>Aplicaciones Disponibles</h3>
           <p>
-            RetroOS viene con varias aplicaciones incorporadas:
+            SermixOS viene con varias aplicaciones incorporadas:
           </p>
           <ul>
             <li><strong>Blog:</strong> Lee artículos sobre IA, datos y automatización.</li>
@@ -221,7 +187,7 @@ const Help: React.FC = () => {
             <li><strong>Contacto:</strong> Ponte en contacto a través del formulario de contacto o redes sociales.</li>
             <li><strong>Mi PC:</strong> Ve información del sistema y detalles de almacenamiento.</li>
             <li><strong>Papelera de Reciclaje:</strong> Gestiona archivos eliminados.</li>
-            <li><strong>Configuración:</strong> Personaliza tu experiencia RetroOS.</li>
+            <li><strong>Configuración:</strong> Personaliza tu experiencia SermixOS.</li>
             <li><strong>Ayuda:</strong> Accede a este sistema de ayuda.</li>
           </ul>
           
@@ -244,17 +210,16 @@ const Help: React.FC = () => {
         <>
           <h3>Configuración del Sistema</h3>
           <p>
-            RetroOS se puede personalizar a través de la aplicación Configuración:
+            SermixOS se puede personalizar a través de la aplicación Configuración:
           </p>
           <ul>
-            <li><strong>Sonido:</strong> Activa/desactiva sonidos del sistema y ajusta el volumen.</li>
             <li><strong>Apariencia:</strong> Cambia el tema visual, alterna animaciones y activa el modo de alto contraste.</li>
             <li><strong>Sistema:</strong> Ve información del sistema y detalles de la versión.</li>
           </ul>
           
           <h3>Personalización del Escritorio</h3>
           <p>
-            Aunque RetroOS mantiene la apariencia clásica de los sistemas operativos antiguos, aún puedes personalizar tu experiencia a través de las configuraciones disponibles.
+            Aunque SermixOS mantiene la apariencia clásica de los sistemas operativos antiguos, aún puedes personalizar tu experiencia a través de las configuraciones disponibles.
           </p>
         </>
       ),
@@ -267,7 +232,7 @@ const Help: React.FC = () => {
         <>
           <h3>Problemas Comunes</h3>
           <p>
-            Si encuentras algún problema mientras usas RetroOS, prueba estas soluciones:
+            Si encuentras algún problema mientras usas SermixOS, prueba estas soluciones:
           </p>
           <ul>
             <li><strong>Aplicación no responde:</strong> Cierra y vuelve a abrir la aplicación.</li>
@@ -277,7 +242,7 @@ const Help: React.FC = () => {
           
           <h3>Compatibilidad del Navegador</h3>
           <p>
-            RetroOS funciona mejor en navegadores modernos como Chrome, Firefox, Safari o Edge. Si experimentas problemas, asegúrate de que tu navegador esté actualizado.
+            SermixOS funciona mejor en navegadores modernos como Chrome, Firefox, Safari o Edge. Si experimentas problemas, asegúrate de que tu navegador esté actualizado.
           </p>
           
           <h3>Reportar Problemas</h3>
@@ -293,38 +258,14 @@ const Help: React.FC = () => {
     setActiveTopic(id);
   };
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
-  };
-
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // In a real app, this would search through help content
-    console.log('Searching for:', searchQuery);
-  };
-
   const currentTopic = topics.find((topic) => topic.id === activeTopic);
 
   return (
     <HelpContainer>
       <HelpHeader>
         <HelpTitle>Ayuda</HelpTitle>
-        <HelpDescription>Aprende a usar RetroOS</HelpDescription>
+        <HelpDescription>Aprende a usar SermixOS</HelpDescription>
       </HelpHeader>
-
-      <form onSubmit={handleSearchSubmit}>
-        <SearchBox>
-          <SearchInput
-            type="text"
-            placeholder="Buscar temas de ayuda..."
-            value={searchQuery}
-            onChange={handleSearchChange}
-          />
-          <SearchButton type="submit">
-            <LucideIcons.Search size={16} />
-          </SearchButton>
-        </SearchBox>
-      </form>
 
       <HelpContent>
         <HelpSidebar>
