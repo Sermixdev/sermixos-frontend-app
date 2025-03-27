@@ -130,9 +130,13 @@ const Window: React.FC<WindowProps> = ({
   }
 
   // Get the icon component from lucide-react
-  const IconComponent = LucideIcons[icon as keyof typeof LucideIcons] || LucideIcons.File;
+  const IconComponent: React.FC<{ size: number }> = ({ size }) => {
+    const Icon = LucideIcons[icon as keyof typeof LucideIcons] as React.FC<{ size: number }> || LucideIcons.File;
+    return <Icon size={size} />;
+  };
 
   const handleClose = (e: React.MouseEvent) => {
+    console.log('Window closed');
     e.stopPropagation();
     dispatch(closeWindow(id));
   };
@@ -165,8 +169,10 @@ const Window: React.FC<WindowProps> = ({
       width: parseInt(ref.style.width),
       height: parseInt(ref.style.height),
     };
-    setPosition(newPosition);
-    dispatch(updateWindowPosition({ id, position: newPosition }));
+    if (newPosition.width >= 600 && newPosition.height >= 450) {
+      setPosition(newPosition);
+      dispatch(updateWindowPosition({ id, position: newPosition }));
+    }
   };
 
   return (
