@@ -13,7 +13,7 @@ const DesktopContainer = styled.div`
     flex-direction: column;
     height: 100vh;
     width: 100vw;
-    background-image: url('/images/bg-xp-green-clouds-welcome.png');
+    background-image: url('/images/bg-xp-green-clouds-pixel.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
